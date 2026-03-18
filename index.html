@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMA CGM | Глобальний логістичний портал - Офіційна система</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cma-blue: #002c5f;
+            --cma-red: #e21e26;
+            --cma-dark: #001a39;
+            --cma-light: #f1f5f9;
+            --accent-gold: #b2945e;
+            --white: #ffffff;
+            --grey: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border-soft: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--cma-light); color: #1e293b; overflow-x: hidden; scroll-behavior: smooth; line-height: 1.6; }
+        nav {            display: flex; justify-content: space-between; align-items: center;            padding: 15px 5%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(15px);            position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--cma-blue);            box-shadow: 0 4px 20px rgba(0,0,0,0.08);        }
+        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 26px; color: var(--cma-blue); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--cma-red); }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--cma-blue); margin-left: 20px; font-weight: 700; font-size: 11px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .nav-links a:hover { color: var(--cma-red); }
+        .hero {            background: linear-gradient(rgba(0,44,95,0.85), rgba(0,26,57,0.95)), url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1600');            background-size: cover; background-attachment: fixed; background-position: center; height: 600px;            display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--white); text-align: center; padding: 20px;        }
+        .hero h1 { font-family: 'Montserrat'; font-size: clamp(32px, 7vw, 64px); margin-bottom: 15px; font-weight: 900; text-transform: uppercase; letter-spacing: -2px; }
+        .hero p { font-size: 20px; opacity: 0.9; max-width: 850px; font-weight: 300; margin-bottom: 30px; }
+        .track-card {            background: var(--white); padding: 50px 40px; border-radius: 20px;            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.3); width: 94%; max-width: 800px;            margin: -100px auto 80px; position: relative; z-index: 10; border-top: 10px solid var(--cma-red);        }
+        .input-group { position: relative; display: flex; flex-direction: column; gap: 15px; }
+        .track-input { width: 100%; padding: 25px 30px; border: 2px solid #cbd5e1; font-size: 20px; border-radius: 12px; font-weight: 700; transition: 0.4s; color: var(--cma-blue); }
+        .track-input:focus { border-color: var(--cma-blue); box-shadow: 0 0 0 5px rgba(0,44,95,0.1); outline: none; }
+        .track-btn { width: 100%; background: var(--cma-blue); color: var(--white); border: none; padding: 22px; font-weight: 800; cursor: pointer; border-radius: 12px; text-transform: uppercase; letter-spacing: 2px; font-size: 18px; transition: 0.3s; }
+        .track-btn:hover { background: var(--cma-dark); transform: translateY(-3px); }
+        .page-view { display: none; padding: 60px 5%; animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .active-view { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
+        .status-banner {            background: var(--white); border-radius: 15px; padding: 40px; margin-bottom: 30px;            border-left: 10px solid var(--warning); display: flex; align-items: center; justify-content: space-between;            box-shadow: 0 10px 30px rgba(0,0,0,0.08);        }
+        .status-text h2 { font-size: 14px; text-transform: uppercase; color: var(--grey); letter-spacing: 2px; }
+        .status-text p { font-size: 28px; font-weight: 900; color: var(--cma-blue); margin-top: 5px; }
+        .badge-status { background: #fff7ed; color: #9a3412; padding: 12px 25px; border-radius: 50px; font-weight: 800; font-size: 14px; border: 2px solid #ffedd5; text-transform: uppercase; }
+        .details-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 50px; }
+        .info-box { background: var(--white); border-radius: 15px; padding: 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); border: 1px solid #edf2f7; position: relative; overflow: hidden; }
+        .info-box h3 { font-size: 16px; text-transform: uppercase; color: var(--cma-red); margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; font-weight: 800; }
+        .info-box p { font-size: 17px; margin-bottom: 12px; display: flex; justify-content: space-between; border-bottom: 1px solid #f8fafc; padding-bottom: 8px; }
+        .info-box b { color: var(--cma-blue); text-align: right; }
+        .map-container {             height: 550px; width: 100%; border-radius: 25px; overflow: hidden;             border: 8px solid white; box-shadow: 0 25px 50px rgba(0,0,0,0.15);             margin-bottom: 50px; position: relative; background: #e5e7eb;        }
+        .google-map-iframe {            width: 100%; height: 100%; border: none;        }
+        .map-overlay-info {             position: absolute; top: 20px; left: 20px; background: rgba(0, 44, 95, 0.95);             color: white; padding: 20px; border-radius: 12px; font-size: 14px; z-index: 5;             border-left: 6px solid var(--cma-red); box-shadow: 0 10px 30px rgba(0,0,0,0.3);            pointer-events: none;        }
+        .section-title { text-align: center; margin: 80px 0 40px; font-family: 'Montserrat'; font-weight: 900; font-size: 36px; color: var(--cma-blue); text-transform: uppercase; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 5%; }
+        .feature-card { background: white; padding: 40px; border-radius: 20px; transition: 0.4s; border-bottom: 5px solid transparent; }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--cma-red); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .feature-card i { font-size: 40px; color: var(--cma-red); margin-bottom: 20px; }
+        .cargo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 0 5% 80px; }
+        .cargo-item { height: 350px; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .cargo-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .cargo-item:hover img { transform: scale(1.1) rotate(1deg); }
+        .cargo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,26,57,0.9), transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; color: white; }
+        .stats-strip { display: flex; flex-wrap: wrap; background: var(--cma-blue); padding: 70px 5%; justify-content: space-around; gap: 40px; }
+        .stat-item { text-align: center; color: white; }
+        .stat-item h3 { font-size: 52px; font-family: 'Montserrat'; font-weight: 900; line-height: 1; }
+        .stat-item p { font-size: 15px; opacity: 0.8; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; }
+        .timeline { position: relative; padding-left: 50px; margin: 50px 0; }
+        .timeline::before { content: ''; position: absolute; left: 15px; top: 0; height: 100%; width: 5px; background: #e2e8f0; border-radius: 10px; }
+        .step { position: relative; margin-bottom: 50px; }
+        .step::after { content: ''; position: absolute; left: -45px; top: 5px; width: 26px; height: 26px; background: var(--white); border: 6px solid var(--cma-blue); border-radius: 50%; z-index: 2; }
+        .step.active::after { background: var(--warning); border-color: var(--warning); transform: scale(1.3); box-shadow: 0 0 15px rgba(245, 158, 11, 0.5); }
+        .step-content { background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
+        footer { background: #000a1a; color: #cbd5e1; padding: 100px 8% 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 60px; }
+        .footer-col h4 { color: white; font-size: 20px; margin-bottom: 25px; font-family: 'Montserrat'; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); margin-top: 80px; padding-top: 40px; text-align: center; font-size: 13px; opacity: 0.6; }
+        @media (min-width: 992px) { .details-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo" onclick="location.reload()">CMA <span>CGM</span></a>
+        <div class="nav-links">
+            <a onclick="location.reload()"><i class="fa-solid fa-house"></i> Головна</a>
+            <a onclick="window.scrollTo(0, 1800)"><i class="fa-solid fa-earth-africa"></i> Мережа</a>
+            <a onclick="window.scrollTo(0, 2800)"><i class="fa-solid fa-ship"></i> Флот</a>
+            <a href="mailto:officialcmashipping@gmail.com"><i class="fa-solid fa-headset"></i> Підтримка</a>
+        </div>
+    </nav>
+
+    <div id="home" class="page-view active-view" style="padding:0">
+        <div class="hero">
+            <h1>ГЛОБАЛЬНА ЛОГІСТИЧНА ПЕРЕВАГА</h1>
+            <p>Ми не просто перевозимо вантажі. Ми будуємо інтелектуальні ланцюги постачання, з'єднуючи континенти за допомогою найсучаснішого флоту та цифрових технологій моніторингу.</p>
+            <button class="track-btn" style="width:300px; background:var(--cma-red); box-shadow: 0 15px 30px rgba(226, 30, 38, 0.4);" onclick="document.getElementById('trackingID').focus()">Відстежити вантаж</button>
+        </div>
+
+        <div class="track-card">
+            <h2 style="font-family: Montserrat; font-size: 24px; text-align: center; color: var(--cma-blue); margin-bottom: 15px; font-weight: 800;">ЦЕНТР ВЕРИФІКАЦІЇ ВАНТАЖІВ</h2>
+            <p style="text-align: center; color: var(--grey); font-size: 14px; margin-bottom: 30px;">Введіть ваш унікальний ідентифікатор (Коносамент, AWB або контейнер)</p>
+            <div class="input-group">
+                <input type="text" id="trackingID" class="track-input" placeholder="CMA-XXX-XXX-XXX">
+                <button class="track-btn" onclick="checkTrack()">Перевірити статус у реальному часі</button>
+            </div>
+            <div style="margin-top: 30px; display: flex; justify-content: space-around; font-size: 12px; color: #64748b; font-weight: 600; border-top: 1px solid #f1f5f9; padding-top: 20px;">
+                <span><i class="fa-solid fa-shield-check" style="color:var(--success)"></i> AES-256 Encryption</span>
+                <span><i class="fa-solid fa-satellite" style="color:var(--cma-blue)"></i> GPS Live Link</span>
+                <span><i class="fa-solid fa-certificate" style="color:var(--accent-gold)"></i> ISO Certified</span>
+            </div>
+        </div>
+
+        <div class="stats-strip">
+            <div class="stat-item"><h3>593</h3><p>Сучасних суден</p></div>
+            <div class="stat-item"><h3>22.5M</h3><p>TEU Перевезено</p></div>
+            <div class="stat-item"><h3>420</h3><p>Портів заходу</p></div>
+            <div class="stat-item"><h3>155k</h3><p>Експертів логістики</p></div>
+        </div>
+
+        <h2 class="section-title">Наші ключові сервіси</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-plane-up"></i>
+                <h3>CMA CGM AIR CARGO</h3>
+                <p>Експрес-доставка для критично важливих вантажів. Найшвидший спосіб з'єднати США та Європу.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-anchor"></i>
+                <h3>SEA SOLUTIONS</h3>
+                <p>Оптимізовані морські маршрути з використанням LNG-палива для мінімізації вуглецевого сліду.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-warehouse"></i>
+                <h3>SMART WAREHOUSING</h3>
+                <p>Понад 750 складських терміналів з повною автоматизацією обліку та безпеки.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Масштаби операцій</h2>
+        <div class="cargo-grid">
+            <div class="cargo-item">
+                <img src="https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?q=80&w=800" alt="Logistics">
+                <div class="cargo-overlay">
+                    <h3>Аеро-логістика</h3>
+                    <p>Прямі чартерні рейси Dallas -> Kyiv.</p>
+                </div>
+            </div>
+            <div class="cargo-item">
+                <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?q=80&w=800" alt="Shipping">
+                <div class="cargo-overlay">
+                    <h3>Морський флот</h3>
+                    <p>Найбільші контейнеровози світу.</p>
+                </div>
+            </div>
+            <div class="cargo-item">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800" alt="Terminal">
+                <div class="cargo-overlay">
+                    <h3>Портові термінали</h3>
+                    <p>Власна інфраструктура в 160 країнах.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tracking-result" class="page-view">
+        <div class="status-banner">
+            <div class="status-text">
+                <h2>Ідентифікатор транзиту: <b id="displayID">CMA-789-RON</b></h2>
+                <p id="mainStatus">Поточний стан: <span style="color: var(--warning)">В ОБРОБЦІ (Очікування терміналу)</span></p>
+            </div>
+            <div class="badge-status">Транзитний статус активний</div>
+        </div>
+
+        <div class="details-grid">
+            <div class="info-box">
+                <h3><i class="fa-solid fa-address-card"></i> Реквізити отримувача</h3>
+                <p><span>Одержувач:</span> <b>Irina Ирина</b></p>
+                <p><span>Пункт призначення:</span> <b>Україна, м. Київ, вул. Центральна, 45</b></p>
+                <p><span>Метод доставки:</span> <b>Кур'єрська доставка (Door-to-Door)</b></p>
+                <p><span>Статус верифікації:</span> <b>Пройдено (KYC Verified)</b></p>
+            </div>
+
+            <div class="info-box">
+                <h3><i class="fa-solid fa-box-open"></i> Параметри відправлення</h3>
+                <p><span>Вміст:</span> <b> Плюшевий ведмедик (вага 9 кг)</b></p>
+                <p><span>Клас небезпеки:</span> <b>Non-Hazardous (Безпечно)</b></p>
+                <p><span>Пункт відправлення:</span> <b>Texas, USA (DFW Hub)</b></p>
+                <p><span>Транспортна лінія:</span> <b>CMA Global Air Link</b></p>
+            </div>
+
+            <div class="info-box" style="background: var(--cma-dark); color: white; grid-column: 1 / -1;">
+                <h3 style="color: white; border-color: rgba(255,255,255,0.1)"><i class="fa-solid fa-money-bill-transfer"></i> Фінансова звітність та митні збори</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div>
+                        <p style="border-color: rgba(255,255,255,0.05)"><span>Логістичні витрати:</span> <b style="color: var(--warning)">[ ЗАПИТУЄТЬETЬСЯ ]</b></p>
+                        <p style="border-color: rgba(255,255,255,0.05)"><span>Митне мито:</span> <b style="color: var(--warning)">[ ЗАПИТУЄТЬСЯ ]</b></p>
+                    </div>
+                    <div>
+                        <p style="border-color: rgba(255,255,255,0.05)"><span>Страховий поліс:</span> <b style="color: var(--warning)">[ ПЕРЕВІРКА ]</b></p>
+                        <p style="border-color: rgba(255,255,255,0.05)"><span>Адмін. збори:</span> <b style="color: var(--warning)">[ ЗАПИТУЄТЬСЯ ]</b></p>
+                    </div>
+                </div>
+                <hr style="margin: 25px 0; opacity: 0.1;">
+                <p style="font-size: 26px; border: none;">Загальна сума до сплати: <span style="font-weight: 900; background: rgba(255,255,255,0.1); padding: 5px 25px; border-radius: 8px;"> </span></p>
+            </div>
+        </div>
+
+        <h2 style="font-family: Montserrat; font-size: 22px; margin-bottom: 25px; color: var(--cma-blue); text-transform: uppercase; font-weight: 900;">Гео-локація вантажу (Live Google Map)</h2>
+        <div class="map-container">
+            <div class="map-overlay-info">
+                <strong>СЕКТОР:</strong> Міжконтинентальний<br>
+                <strong>ТРАЄКТОРІЯ:</strong> Dallas, Texas ➔ Kyiv, Ukraine<br>
+                <strong>СТАТУС:</strong> В дорозі (Авіа)
+            </div>
+            <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d26853878.683533475!2d-45.72895240224217!3d37.64386762334808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e4!4m5!1s0x864c19f77b45974b%3A0xb951ba5d640f6fc!2sTexas%2C%20USA!3m2!1d31.9685988!2d-99.9018131!4m5!1s0x40d4cf4ee15a4505%3A0x7649317428c69610!2sKyiv%2C%20Ukraine!3m2!1d50.4501!2d30.5234!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <h2 style="font-family: Montserrat; font-size: 22px; margin: 50px 0 25px; color: var(--cma-blue); text-transform: uppercase; font-weight: 900;">Журнал подій транспортування</h2>
+        <div class="timeline">
+            <div class="step active">
+                <div class="step-content">
+                    <p style="font-size:12px; font-weight:900; color:var(--warning)">ОЧІКУВАННЯ ОНОВЛЕННЯ</p>
+                    <p style="font-weight:900; color:var(--cma-blue); font-size: 20px;">Міжнародний транзит - В процесі</p>
+                    <p style="font-size: 15px; margin-top:10px; opacity: 0.8;">Вантаж передано міжнародній авіалінії. Очікується підтвердження прибуття в сортувальний хаб Європи для подальшого відправлення в Україну.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-content">
+                    <p style="font-weight:800; color:var(--cma-blue);">Митне оформлення (Експорт США)</p>
+                    <p style="font-size: 15px; opacity: 0.8;">Вивізні документи перевірено митною службою США. Дозвіл на відправлення надано.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-content">
+                    <p style="font-weight:800; color:var(--cma-blue);">Прийом вантажу на термінал DFW</p>
+                    <p style="font-size: 15px; opacity: 0.8;">Вантаж отримано в логістичному центрі Техасу. Проведено первинне сканування та маркування.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 style="font-size: 26px; font-weight: 900;">CMA <span>CGM</span></h4>
+                <p>Ваш надійний партнер у світі глобальної торгівлі. Ми забезпечуємо зв'язок між виробниками та споживачами у кожному куточку планети.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Корисні посилання</h4>
+                <p>Морські тарифи</p>
+                <p>Авіа-розклад</p>
+                <p>Сталий розвиток</p>
+                <p>Інвесторам</p>
+            </div>
+            <div class="footer-col">
+                <h4>Підтримка клієнтів</h4>
+                <p><i class="fa-solid fa-envelope"></i> officialcmashipping@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +52 1 442 675 9318</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 CMA CGM Group. Усі права захищені.</p>
+        </div>
+    </footer>
+
+    <script>
+        function checkTrack() {
+            const code = document.getElementById('trackingID').value.trim().toUpperCase();
+            if (code === "CMA-789-RON") {
+                document.getElementById('home').style.display = 'none';
+                document.getElementById('tracking-result').classList.add('active-view');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            } else {
+                alert("Помилка верифікації: Код не знайдено в базі активних відправлень.");
+            }
+        }
+    </script>
+</body>
+</html>
